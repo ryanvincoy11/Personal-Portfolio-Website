@@ -4,6 +4,7 @@ import { SpriteAnimator } from "./SpriteAnimator";
 import { Colors, Fonts } from '../../constants/theme';
 import { VT323_400Regular } from '@expo-google-fonts/vt323';
 import { useFonts } from "expo-font";
+import { useTheme } from "../ThemeProvider";
 
 type ProjectContentProps = {
     titleLabel: string,
@@ -17,6 +18,10 @@ type ProjectContentProps = {
 }
 
 export function ProjectContent({titleLabel, label, source, frameWidth, frameHeight, columns, frameCount, fps}: ProjectContentProps) {
+
+  const { theme } = useTheme();
+  const colors = Colors[theme];
+
   const [fontsLoaded] = useFonts({
     VT323_400Regular,
   });
@@ -25,7 +30,7 @@ export function ProjectContent({titleLabel, label, source, frameWidth, frameHeig
 
   return (
     <View>
-      <Text style={styles.textTitle}>{titleLabel}</Text>
+      <Text style={[styles.textTitle, { color: colors.ccText }]}>{titleLabel}</Text>
       <View style={styles.horizontalContainer}>
         <ScrollView style={styles.scrollArea} contentContainerStyle={styles.scrollContent}>
             <Text style={styles.text}>
@@ -61,7 +66,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   textTitle: {
-    color: Colors.dark.ccText,
     fontSize: 20,
     fontFamily: Fonts.menu,
     borderBottomWidth: 4,

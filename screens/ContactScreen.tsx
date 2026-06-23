@@ -4,28 +4,31 @@ import { Hyperlink } from "../components/UI/Hyperlink";
 import { Colors, Fonts } from "../constants/theme";
 import { SpriteAnimator } from '../components/UI/SpriteAnimator';
 import { Linking } from "react-native";
+import { useTheme } from "../components/ThemeProvider";
 
 type ContactScreenProps = {
     navigation: any
 }
 
 export default function ContactScreen({ navigation }: ContactScreenProps) {
+    const { theme, toggleTheme } = useTheme();
+    const colors = Colors[theme];
 
     function handleBack() {
         navigation.navigate("Home");
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: colors.backgroundB}]}>
             <View style={styles.nonBackButton}>
-                <Text style={styles.textTitle}>Contact Info:</Text>
+                <Text style={[styles.textTitle, { color: colors.ccText}]}>Contact Info:</Text>
 
                 <View style={styles.linkContainer}>
-                    <Text style={styles.text}>Email: vincoyrj@outlook.com</Text>
+                    <Text style={[styles.text, { color: colors.ccText}]}>Email: vincoyrj@outlook.com</Text>
                 </View>
 
                 <View style={styles.linkContainer}>
-                    <Text style={styles.text}>LinkedIn: </Text>
+                    <Text style={[styles.text, { color: colors.ccText}]}>LinkedIn: </Text>
                     <Hyperlink
                     label="https://www.linkedin.com/in/ryan-vincoy-886596362/"
                     size={20}
@@ -34,7 +37,7 @@ export default function ContactScreen({ navigation }: ContactScreenProps) {
                 </View>
 
                 <View style={styles.linkContainer}>
-                    <Text style={styles.text}>GitHub: </Text>
+                    <Text style={[styles.text, { color: colors.ccText}]}>GitHub: </Text>
                     <Hyperlink
                     label="https://github.com/ryanvincoy11"
                     size={20}
@@ -63,7 +66,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: Colors.dark.backgroundB,
     paddingVertical: 10
     },
   linkContainer: {
@@ -74,7 +76,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textTitle: {
-    color: Colors.dark.ccText,
     fontSize: 25,
     fontFamily: Fonts.menu,
     borderBottomWidth: 4,
@@ -83,7 +84,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   text: {
-    color: Colors.dark.ccText,
     fontFamily: Fonts.menu,
     fontSize: 20,
   },

@@ -4,6 +4,7 @@ import { GameButton } from "../components/UI/GameButton";
 import { LevelButton } from "../components/UI/LevelButton";
 import { ProjectContent } from "../components/UI/ProjectContent";
 import { Colors, Fonts } from "../constants/theme";
+import { useTheme } from "../components/ThemeProvider";
 
 type levelScreenProp = {
     navigation: any
@@ -152,13 +153,15 @@ const projects = [
 
 export default function LevelScreen({ navigation }: levelScreenProp) {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const { theme, toggleTheme } = useTheme();
+  const colors = Colors[theme];
 
   const activeProject = projects.find((p) => p.id === selectedProject);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: colors.backgroundB}]}>
       <View style={styles.insideContainer}>
-        <Text style={styles.textTitle}>Project History:</Text>
+        <Text style={[styles.textTitle, {color: colors.ccText}]}>Project History:</Text>
 
         <Modal visible={!!activeProject} transparent>
           <Pressable 
@@ -166,7 +169,7 @@ export default function LevelScreen({ navigation }: levelScreenProp) {
                 onPress={() => setSelectedProject(null)}
           >
             <Pressable 
-            style={styles.modalBox}
+            style={[styles.modalBox, {backgroundColor: colors.backgroundA}]}
             onPress={() => {}}
             >
 
@@ -187,7 +190,7 @@ export default function LevelScreen({ navigation }: levelScreenProp) {
           </Pressable>
         </Modal>
 
-        <ScrollView style={styles.scrollArea} contentContainerStyle={styles.scrollContent}>
+        <ScrollView style={[styles.scrollArea, {backgroundColor: colors.backgroundA}]} contentContainerStyle={styles.scrollContent}>
           {projects.map((p) => (
             <LevelButton
               key={p.id}
@@ -220,7 +223,6 @@ export default function LevelScreen({ navigation }: levelScreenProp) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.dark.backgroundB,
   },
   insideContainer: {
     flex: 1,
@@ -242,7 +244,6 @@ const styles = StyleSheet.create({
     modalBox: {
     width: "50%",
     height: "70%",
-    backgroundColor: Colors.dark.backgroundA,
     borderColor: "black",
     borderWidth: 2,
     justifyContent: "flex-start",
@@ -252,7 +253,6 @@ const styles = StyleSheet.create({
   scrollArea: {
     flex: 1,
     width: "40%",
-    backgroundColor: Colors.dark.backgroundA,
     borderColor: "black",
     borderWidth: 2,
     margin: 10,
@@ -264,7 +264,6 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   textTitle: {
-    color: Colors.dark.ccText,
     fontSize: 20,
     fontFamily: Fonts.menu,
     borderBottomWidth: 4,

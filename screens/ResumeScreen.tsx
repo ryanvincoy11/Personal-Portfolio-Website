@@ -3,12 +3,16 @@ import { GameButton } from "../components/UI/GameButton";
 import { Hyperlink } from "../components/UI/Hyperlink";
 import { Colors, Fonts } from "../constants/theme";
 import { Platform } from "react-native";
+import { useTheme } from "../components/ThemeProvider";
 
 type ResumeScreenProps = {
     navigation: any
 }
 
 export default function ResumeScreen({ navigation }: ResumeScreenProps) {
+
+  const { theme, toggleTheme } = useTheme();
+  const colors = Colors[theme];
 
   async function handleDownload() {
     if (Platform.OS === "web") {
@@ -21,12 +25,11 @@ export default function ResumeScreen({ navigation }: ResumeScreenProps) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: colors.backgroundB}]}>
 
       {/* TITLE */}
-      <Text style={styles.title}>Resume:</Text>
+      <Text style={[styles.title, {color: colors.ccText}]}>Resume:</Text>
 
-      
         <Image
           source={require("../assets/RyanVincoyResume.png")}
           style={styles.resumeImage}
@@ -68,7 +71,6 @@ export default function ResumeScreen({ navigation }: ResumeScreenProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.dark.backgroundB,
     paddingTop: 40,
     paddingBottom: 20,
     alignItems: "center",
@@ -78,7 +80,6 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: Fonts.menu,
     fontSize: 28,
-    color: Colors.dark.ccText,
     textDecorationLine: "underline",
     marginBottom: 20,
   },

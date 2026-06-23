@@ -1,13 +1,16 @@
 import { View, Image, Text, StyleSheet } from "react-native";
 import { Fonts, Colors } from '../../constants/theme';
 import { SpriteAnimator } from '../../components/UI/SpriteAnimator';
+import { useTheme } from "../ThemeProvider";
 
 export default function Character() {
-
+    const { theme } = useTheme();
+    const colors = Colors[theme];
+    
     return(
         <View style={styles.mainContainer}>
             <View style={styles.container}>
-                <Text style={styles.textTitle}>Character Name: Ryan Vincoy</Text>
+                <Text style={[styles.textTitle, { color: colors.ccText }]}>Character Name: Ryan Vincoy</Text>
                 <Image
                     style={styles.photo}
                     source={require('../../assets/MeAndMaddi2.png')}
@@ -45,7 +48,6 @@ const styles = StyleSheet.create({
     transform: [{ scale: 1.1}],
   },
   textTitle: {
-    color: Colors.dark.ccText,
     fontSize: 20,
     fontFamily: Fonts.menu,
     borderBottomWidth: 4,
@@ -59,11 +61,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderColor: 'black',
     borderWidth: 2,
-  },
-  text: {
-    color: Colors.dark.ccText,
-    fontFamily: Fonts.menu,
-    margin: 5,
-    fontSize: 10,
   },
 });

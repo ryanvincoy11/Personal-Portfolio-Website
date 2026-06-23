@@ -8,12 +8,17 @@ import { useFonts } from "expo-font";
 import { GameButton } from '../components/UI/GameButton';
 import { OutlinedText } from '../components/UI/OutlinedText';
 import { SpriteAnimator } from '../components/UI/SpriteAnimator';
+import { useTheme } from "../components/ThemeProvider";
 
 type HomeScreenProps = {
     navigation: any
 }
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
+
+  const { theme, toggleTheme } = useTheme();
+  const colors = Colors[theme];
+
   const [fontsLoaded] = useFonts({
     PressStart2P_400Regular,
     VT323_400Regular,
@@ -37,13 +42,13 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     navigation.navigate("Contact");
   }
 
-  function handleOptions() { //temp
-    console.log("Button 2 pressed");
+  function handleOptions() {
+    navigation.navigate("Settings");
   }
 
   return (
     <LinearGradient
-      colors={[Colors.dark.backgroundA, Colors.dark.backgroundB]}
+      colors={[colors.backgroundA, colors.backgroundB]}
       style={styles.background}
     >
       

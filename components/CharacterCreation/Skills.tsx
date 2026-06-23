@@ -1,39 +1,41 @@
 import { View, Text, StyleSheet } from "react-native";
 import { Fonts, Colors } from '../../constants/theme';
 import { SpriteAnimator } from '../../components/UI/SpriteAnimator';
-
+import { useTheme } from "../ThemeProvider";
 
 export default function Skills() {
+  const { theme } = useTheme();
+  const colors = Colors[theme];
     return(
         <View style={styles.mainContainer}>
 
 
             <View style={styles.container}>
-                <Text style={styles.text}></Text>
-                <Text style={styles.textTitle}>Skills:</Text>
-                <Text style={styles.text}>Languages: Java, C++, Python, C#,</Text>
-                <Text style={styles.text}>TypeScript, SQL, F#, GO, C </Text>
+                <Text style={[styles.text, { color: colors.ccText }]}></Text>
+                <Text style={[styles.textTitle, { color: colors.ccText }]}>Skills:</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>Languages: Java, C++, Python, C#,</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>TypeScript, SQL, F#, GO, C </Text>
                 <View style={styles.divider} />
-                <Text style={styles.text}>Front-End: React Native, Unity UI, JavaFX</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>Front-End: React Native, Unity UI, JavaFX</Text>
                 <View style={styles.divider} />
-                <Text style={styles.text}>Testing: JUnit5, Google Tests, NUnit</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>Testing: JUnit5, Google Tests, NUnit</Text>
                 <View style={styles.divider} />
-                <Text style={styles.text}>Paradigms: OOP, Declarative,</Text>
-                <Text style={styles.text}>Functional, Event-Driven, Concurrent</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>Paradigms: OOP, Declarative,</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>Functional, Event-Driven, Concurrent</Text>
                 <View style={styles.divider} />
-                <Text style={styles.text}>SW Engr: Agile Development, Scrum,</Text>
-                <Text style={styles.text}>Version Control (Git), Design Patterns,</Text>
-                <Text style={styles.text}>UML Class Diagrams, Wireframing</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>SW Engr: Agile Development, Scrum,</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>Version Control (Git), Design Patterns,</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>UML Class Diagrams, Wireframing</Text>
                 <View style={styles.divider} />
-                <Text style={styles.text}>Data Analysis: SQLite3, Matplotlib,</Text>
-                <Text style={styles.text}>CSV Processing, Data Visualization</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>Data Analysis: SQLite3, Matplotlib,</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>CSV Processing, Data Visualization</Text>
                 <View style={styles.divider} />
-                <Text style={styles.text}>Networking: Concurrent Programming,</Text>
-                <Text style={styles.text}>Socket Programming, REST APIs</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>Networking: Concurrent Programming,</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>Socket Programming, REST APIs</Text>
                 <View style={styles.divider} />
-                <Text style={styles.text}>Hardware: Breadboard Circuit Design,</Text>
-                <Text style={styles.text}>Arduino Microcontroller Programming</Text>
-                <Text style={styles.text}></Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>Hardware: Breadboard Circuit Design,</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}>Arduino Microcontroller Programming</Text>
+                <Text style={[styles.text, { color: colors.ccText }]}></Text>
             </View>
 
 
@@ -77,7 +79,6 @@ const styles = StyleSheet.create({
     margin: 50,
   },
   textTitle: {
-    color: Colors.dark.ccText,
     fontSize: 20,
     fontFamily: Fonts.menu,
     borderBottomWidth: 4,
@@ -86,7 +87,6 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   text: {
-    color: Colors.dark.ccText,
     fontFamily: Fonts.menu,
     margin: 5,
     fontSize: 15,

@@ -8,6 +8,7 @@ import Character from "../components/CharacterCreation/Character";
 import About from "../components/CharacterCreation/About";
 import Attributes from "../components/CharacterCreation/Attributes";
 import Skills from "../components/CharacterCreation/Skills";
+import { useTheme } from "../components/ThemeProvider";
 
 type CharacterCreationScreenProps = {
     navigation: any
@@ -15,6 +16,8 @@ type CharacterCreationScreenProps = {
 
 export default function CharacterCreationScreen({ navigation }: CharacterCreationScreenProps) {
   const [selectedMenu, setSelectedMenu] = useState("Character");
+  const { theme, toggleTheme } = useTheme();
+  const colors = Colors[theme];
 
   const [fontsLoaded] = useFonts({
     PressStart2P_400Regular,
@@ -25,7 +28,7 @@ export default function CharacterCreationScreen({ navigation }: CharacterCreatio
   return (
     <View style={styles.container}>
 
-      <View style={styles.menubar}>
+      <View style={[styles.menubar, { backgroundColor: colors.backgroundA }]}>
 
         <View style={styles.topSection}>
           <GameButton label = "Character" labelHovered = "Character" 
@@ -55,7 +58,7 @@ export default function CharacterCreationScreen({ navigation }: CharacterCreatio
 
       </View>
 
-      <View style={styles.nonmenubar}>
+      <View style={[styles.nonmenubar, { backgroundColor: colors.backgroundB } ]}>
         {selectedMenu === "Character" && <Character />}
         {selectedMenu === "About" && <About />}
         {selectedMenu === "Attributes" && <Attributes />}
@@ -73,7 +76,6 @@ const styles = StyleSheet.create({
   },
   menubar: {
     width: 150,
-    backgroundColor: Colors.dark.backgroundA,
     borderWidth: 2,
     borderColor: 'black',
     alignItems: 'center',
@@ -87,7 +89,6 @@ const styles = StyleSheet.create({
   },
   nonmenubar: {
     flex: 1,
-    backgroundColor: Colors.dark.backgroundB,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
