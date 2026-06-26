@@ -20,10 +20,11 @@ export function AudioProvider({ children }: AudioProviderProp) {
   // Load music once
   useEffect(() => {
     async function load() {
-      const { sound } = await Audio.Sound.createAsync(
-        require("../sounds/retroBackgroundMusic.mp3"),
-        { isLooping: true, volume: musicVolume }
-      );
+      const sound = new Audio.Sound();
+
+      await sound.loadAsync(require("../sounds/retroBackgroundMusic.mp3"));
+      await sound.setIsLoopingAsync(true);
+      await sound.setVolumeAsync(musicVolume);
       bgSound.current = sound;
 
       try {

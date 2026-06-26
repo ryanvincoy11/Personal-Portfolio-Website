@@ -13,7 +13,7 @@ export default function Character() {
                 <Text style={[styles.textTitle, { color: colors.ccText }]}>Character Name: Ryan Vincoy</Text>
                 <Image
                     style={styles.photo}
-                    source={require('../../assets/MeAndMaddi2.png')}
+                    source={require('../../assets/RyanPhoto.png')}
                 />
             </View>
             <View style={styles.containerB}>

@@ -31,7 +31,13 @@ const projects = [
   {
     id: "PPW",
     title: "Personal Portfolio Website",
-    desc: "Description",
+    desc: "Description: This is the website you are on right now! It was built using typescript and React framework"
+    +" to showcase projects from my GitHub repository and a more in-depth description of me and my skills compared "
+    +"to my resume. Additionally, this website was deployed on Vercel. I also used version control software like Git."
+    +" For the 2D Sprite animations, I used Piskel app to draw 2D sprites and exported the png files. From there, "
+    +"I created a component which takes those png files and turns them into an animation. I didn't want to create a"
+    +" basic portfolio website so I created the theme of retro video games since video games have been a big inspiration"
+    +" on my life. ",
     source: require("../assets/PPWSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
@@ -42,7 +48,9 @@ const projects = [
   {
     id: "DSE",
     title: "Document Search Engine",
-    desc: "Description",
+    desc: "Description: This program was written in C++ and it takes user input and tokenizes it which is then used to efficiently search"
+    +" a document for those words and return the documents that contain the word. The program also supports "
+    +"complex set notation similar to Google's special notation for difference, union, and intersection.",
     source: require("../assets/DSESprite.png"),
     frameWidth: 256,
     frameHeight: 256,
@@ -53,7 +61,9 @@ const projects = [
   {
     id: "SD",
     title: "Shape Drawer",
-    desc: "Description",
+    desc: "Description: This program was written in GO and it takes user input to create .ppm files which can then be viewed graphically "
+    +"via an image viewer specifically for .ppm files. The program uses computer graphic techniques to figure out which colored pixel "
+    +"goes where for the desired shape, size, and color.",
     source: require("../assets/SDSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
@@ -64,7 +74,8 @@ const projects = [
   {
     id: "SM",
     title: "String Manipulator",
-    desc: "Description",
+    desc: "Description: This program was written in F# and it manipulates strings via recursive and higher-order functions. "
+    +"The program showcases functional programming and uses F# higher-order functions like List.filter.",
     source: require("../assets/SManipSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
@@ -75,7 +86,10 @@ const projects = [
   {
     id: "RPC",
     title: "Rock Paper Scissors",
-    desc: "Description",
+    desc: "Description: This project contains the code which Arduino microcontrollers ran in to play Rock Paper Scissors with "
+    +"the computer which has a random mode and a thinking mode which receives the previous moves that the player made and comes "
+    +"up with the next best move. Also in the repository is an image of the circuit made using TinkerCAD and how each Arduino "
+    +" connects with each other and their corresponding devices like LCD or buttons.",
     source: require("../assets/RPCSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
@@ -86,7 +100,9 @@ const projects = [
   {
     id: "TCP",
     title: "Three Card Poker",
-    desc: "Description",
+    desc: "Description: This project contains both the server-side and client-side code for a Three Card Poker game. Both code was "
+    +"written in Java and utilizes the MVC design pattern. JavaFX was used to create the GUIs and multithreading is used to have the "
+    +"server communicate with multiple clients. To create this project, I created wireframes and class diagrams to help me design the code.",
     source: require("../assets/TCPSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
@@ -97,7 +113,9 @@ const projects = [
   {
     id: "CTCA",
     title: "Chicago Traffic Camera Analysis",
-    desc: "Description",
+    desc: "Description: This project contains two Python programs, one that converts the CSV files which contain data for speed "
+    +"and red-light cameras across Chicago into databases that the other program can read and analyze the databases using "
+    +"SQLite queries. Alongside using sqlite3, this program also can visualize and analyze this data using mathplotlib.",
     source: require("../assets/TrafficLightSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
@@ -108,7 +126,7 @@ const projects = [
   {
     id: "LLCV",
     title: "Linked List & Circular Vector",
-    desc: "Description",
+    desc: "Description: This project contains",
     source: require("../assets/LLSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
@@ -119,7 +137,7 @@ const projects = [
   {
     id: "BST",
     title: "Binary Search Tree",
-    desc: "Description",
+    desc: "Description: This program contains",
     source: require("../assets/BSTSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
@@ -130,7 +148,7 @@ const projects = [
   {
     id: "H",
     title: "Hashmap",
-    desc: "Description",
+    desc: "Description: This program contains ",
     source: require("../assets/HashmapSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
@@ -141,7 +159,8 @@ const projects = [
   {
     id: "CS",
     title: "Coming Soon...",
-    desc: "Description",
+    desc: "Description: The next project that I will be working on is a UML Diagram CAD application "
+    +"which Software Engineers can use to easily create UML Diagrams like class or use-case diagrams.",
     source: require("../assets/Basketball.png"),
     frameWidth: 256,
     frameHeight: 256,

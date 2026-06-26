@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
+import { useState } from "react";
 import { GameButton } from "../components/UI/GameButton";
 import { Colors, Fonts } from "../constants/theme";
 import { SpriteAnimator } from '../components/UI/SpriteAnimator';
@@ -14,21 +15,31 @@ export default function SettingsScreen({ navigation }: SettingsScreenProps) {
 
     const { theme, toggleTheme } = useTheme();
     const colors = Colors[theme];
-    const { musicVolume, setMusicVolume } = useAudio();
+    const { musicVolume, setMusicVolume, playMusic, stopMusic } = useAudio();
+    const [music, toggleMusic] = useState(true);
 
     function handleBack() {
         navigation.navigate("Home");
+    }
+
+    function musicButton() {
+        if(music){
+            playMusic();
+        } else {
+            stopMusic();
+        }
+        toggleMusic(!music)
     }
 
     return (
         <View style={[styles.container, { backgroundColor: colors.backgroundB }]}>
             <Text style={[styles.textTitle, { color: colors.ccText }]}>Settings:</Text>
 
-            <Text style={[styles.text, { color: colors.ccText }]}>Bum Bum</Text>
+            <Text style={[styles.text, { color: colors.ccText }]}></Text>
 
             <GameButton
                 label={theme === "dark" ? "Light Mode" : "Dark Mode"}
-                labelHovered="Toggle Theme"
+                labelHovered={theme === "dark" ? "Light Mode" : "Dark Mode"}
                 size="small"
                 onPress={toggleTheme}
             />
@@ -43,6 +54,13 @@ export default function SettingsScreen({ navigation }: SettingsScreenProps) {
                 minimumTrackTintColor={colors.text}
                 maximumTrackTintColor="#555"
                 thumbTintColor={colors.text}
+            />
+
+            <GameButton 
+                label={music === true ? "Play Music" : "Stop Music"}
+                labelHovered={music === true ? "Play Music" : "Stop Music"}
+                size="small"
+                onPress={musicButton}
             />
 
             <SpriteAnimator
