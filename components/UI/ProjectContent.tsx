@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, ScrollView, Image, StyleSheet } from "react-native";
+import { View, Text, ScrollView, Image, StyleSheet, Linking } from "react-native";
 import { SpriteAnimator } from "./SpriteAnimator";
 import { Colors, Fonts } from '../../constants/theme';
 import { VT323_400Regular } from '@expo-google-fonts/vt323';
 import { useFonts } from "expo-font";
 import { useTheme } from "../ThemeProvider";
+import { Hyperlink } from "../UI/Hyperlink";
 
 type ProjectContentProps = {
     titleLabel: string,
@@ -15,9 +16,10 @@ type ProjectContentProps = {
     columns: number,
     frameCount: number,
     fps: number,
+    hyperlinkLabel: string,
 }
 
-export function ProjectContent({titleLabel, label, source, frameWidth, frameHeight, columns, frameCount, fps}: ProjectContentProps) {
+export function ProjectContent({titleLabel, label, source, frameWidth, frameHeight, columns, frameCount, fps, hyperlinkLabel}: ProjectContentProps) {
 
   const { theme } = useTheme();
   const colors = Colors[theme];
@@ -29,7 +31,7 @@ export function ProjectContent({titleLabel, label, source, frameWidth, frameHeig
   if (!fontsLoaded) return null;
 
   return (
-    <View>
+    <View style = {styles.container}>
       <Text style={[styles.textTitle, { color: colors.ccText }]}>{titleLabel}</Text>
       <View style={styles.horizontalContainer}>
         <ScrollView style={styles.scrollArea} contentContainerStyle={styles.scrollContent}>
@@ -48,11 +50,19 @@ export function ProjectContent({titleLabel, label, source, frameWidth, frameHeig
             animateHorizontal={false}
         />
       </View>
+      <Hyperlink
+        label={hyperlinkLabel}
+        size={12}
+        onPress={() => Linking.openURL(hyperlinkLabel)}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   horizontalContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

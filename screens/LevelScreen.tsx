@@ -27,6 +27,7 @@ const projects = [
     columns: 4,
     fps: 8,
     frameCount: 19,
+    hyperlinkLabel: "https://github.com/ryanvincoy11/Magic-Missile-Wizard-Duel",
   },
   {
     id: "PPW",
@@ -44,6 +45,7 @@ const projects = [
     columns: 2,
     fps: 6,
     frameCount: 5,
+    hyperlinkLabel: "https://github.com/ryanvincoy11/Personal-Portfolio-Website",
   },
   {
     id: "DSE",
@@ -57,6 +59,7 @@ const projects = [
     columns: 3,
     fps: 4,
     frameCount: 9,
+    hyperlinkLabel: "https://github.com/ryanvincoy11/Document-Search-Engine",
   },
   {
     id: "SD",
@@ -70,6 +73,7 @@ const projects = [
     columns: 4,
     fps: 8,
     frameCount: 19,
+    hyperlinkLabel: "https://github.com/ryanvincoy11/ShapeDrawer",
   },
   {
     id: "SM",
@@ -82,6 +86,7 @@ const projects = [
     columns: 3,
     fps: 2,
     frameCount: 11,
+    hyperlinkLabel: "https://github.com/ryanvincoy11/FSharp-String-Manipulator",
   },
   {
     id: "RPC",
@@ -96,6 +101,7 @@ const projects = [
     columns: 3,
     fps: 5,
     frameCount: 10,
+    hyperlinkLabel: "https://github.com/ryanvincoy11/RockPaperScissors",
   },
   {
     id: "TCP",
@@ -109,6 +115,7 @@ const projects = [
     columns: 2,
     fps: 1,
     frameCount: 4,
+    hyperlinkLabel: "",
   },
   {
     id: "CTCA",
@@ -122,39 +129,51 @@ const projects = [
     columns: 2,
     fps: 1,
     frameCount: 3,
+    hyperlinkLabel: "https://github.com/ryanvincoy11/Chicago-Traffic-Camera-Analysis",
   },
   {
     id: "LLCV",
     title: "Linked List & Circular Vector",
-    desc: "Description: This project contains",
+    desc: "Description: This project contains two classes for the linked list and circular vector data structure and was written in C++"
+    +". Each data structure was implemented to have their optimal Big-O time complexeties. Along with functions for the data strucutres,"
+    +" both classes have their own test suites which were created using Google Tests.",
     source: require("../assets/LLSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
     columns: 2,
     fps: 1,
     frameCount: 5,
+    hyperlinkLabel: "https://github.com/ryanvincoy11/LinkedList-and-Circular-Vectors",
   },
   {
     id: "BST",
     title: "Binary Search Tree",
-    desc: "Description: This program contains",
+    desc: "Description: This program contains the class for the binary search tree data structure and was written in C++."
+    +" This project utilizes pointers and time efficient algorithms to have optimal time complexities. Also, showcased is "
+    +"deallocation for memory when unused. This program also contains a test suite which was implemented using Google Tests.",
     source: require("../assets/BSTSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
     columns: 2,
     fps: 1,
     frameCount: 5,
+    hyperlinkLabel: "https://github.com/ryanvincoy11/Binary-Search-Tree",
   },
   {
     id: "H",
     title: "Hashmap",
-    desc: "Description: This program contains ",
+    desc: "Description: This program contains the class for the hashmap data structure and was written in C++. "
+    +"The hashmap data strucure was implemented using an array for the buckets and to avoid the collision problem, "
+    +"each bucket is a linked list. To keep an optimal time complexity for searching through the hashmap, the hashmap"
+    +" will resize and move elements into the new correct location that the hashing function gives it. This program also "
+    +"contains test cases written using the Google Tests framework.",
     source: require("../assets/HashmapSprite.png"),
     frameWidth: 256,
     frameHeight: 256,
     columns: 2,
     fps: 1,
     frameCount: 6,
+    hyperlinkLabel: "https://github.com/ryanvincoy11/Hashmap",
   },
   {
     id: "CS",
@@ -167,6 +186,7 @@ const projects = [
     columns: 4,
     fps: 10,
     frameCount: 20,
+    hyperlinkLabel: "https://github.com/ryanvincoy11",
   },
 ];
 
@@ -202,6 +222,7 @@ export default function LevelScreen({ navigation }: levelScreenProp) {
                     columns={activeProject.columns}
                     fps={activeProject.fps}
                     frameCount={activeProject.frameCount}
+                    hyperlinkLabel={activeProject.hyperlinkLabel}
                 />
                 )}
 
