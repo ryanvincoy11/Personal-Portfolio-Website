@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Pressable, Modal } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Pressable, Modal, useWindowDimensions } from "react-native";
 import { useState } from "react";
 import { GameButton } from "../components/UI/GameButton";
 import { LevelButton } from "../components/UI/LevelButton";
@@ -7,13 +7,14 @@ import { Colors, Fonts } from "../constants/theme";
 import { useTheme } from "../components/ThemeProvider";
 
 type levelScreenProp = {
-    navigation: any
-}
+  navigation: any;
+};
+
 const projects = [
   {
     id: "MMWD",
     title: "Magic Missile Wizard Duel",
-    desc: 
+    desc:
     "Description: Magic Missile Wizard Duel (MMWD) is a PvP video game prototype built using C# and Unity Engine."
     +" Me and my group built MMWD implemented the functionality required by the design team."
     +" We worked using the Agile developement methodology, doing weekly Scrum meetings and had monthly Sprints."
@@ -115,7 +116,7 @@ const projects = [
     columns: 2,
     fps: 1,
     frameCount: 4,
-    hyperlinkLabel: "",
+    hyperlinkLabel: "https://github.com/ryanvincoy11/Three-Card-Poker",
   },
   {
     id: "CTCA",
@@ -190,47 +191,93 @@ const projects = [
   },
 ];
 
+
 export default function LevelScreen({ navigation }: levelScreenProp) {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const colors = Colors[theme];
+  const { width: screenWidth } = useWindowDimensions();
+
+  const isMobile = screenWidth < 700;
 
   const activeProject = projects.find((p) => p.id === selectedProject);
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.backgroundB}]}>
-      <View style={styles.insideContainer}>
-        <Text style={[styles.textTitle, {color: colors.ccText}]}>Project History:</Text>
+    <View style={[styles.container, { backgroundColor: colors.backgroundB }]}>
+      <View
+        style={[
+          styles.insideContainer,
+          {
+            margin: isMobile ? 10 : 25,
+            paddingHorizontal: isMobile ? 10 : 0,
+          },
+        ]}
+      >
+        <Text
+          style={[
+            styles.textTitle,
+            {
+              color: colors.ccText,
+              fontSize: isMobile ? 18 : 20,
+              marginBottom: isMobile ? 10 : 5,
+            },
+          ]}
+        >
+          Project History:
+        </Text>
 
-        <Modal visible={!!activeProject} transparent>
-          <Pressable 
-                style={styles.modalContainer} 
-                onPress={() => setSelectedProject(null)}
+        {/* Modal */}
+        <Modal visible={!!activeProject} transparent animationType="fade">
+          <Pressable
+            style={styles.modalContainer}
+            onPress={() => setSelectedProject(null)}
           >
-            <Pressable 
-            style={[styles.modalBox, {backgroundColor: colors.backgroundA}]}
-            onPress={() => {}}
+            <Pressable
+              style={[
+                styles.modalBox,
+                {
+                  backgroundColor: colors.backgroundA,
+                  width: isMobile ? "90%" : "60%",
+                  height: isMobile ? "80%" : "70%",
+                  padding: isMobile ? 10 : 20,
+                },
+              ]}
+              onPress={() => {}}
             >
-
-                {activeProject && (
+              {activeProject && (
                 <ProjectContent
-                    titleLabel={activeProject.title}
-                    label={activeProject.desc}
-                    source={activeProject.source}
-                    frameWidth={activeProject.frameWidth}
-                    frameHeight={activeProject.frameHeight}
-                    columns={activeProject.columns}
-                    fps={activeProject.fps}
-                    frameCount={activeProject.frameCount}
-                    hyperlinkLabel={activeProject.hyperlinkLabel}
+                  titleLabel={activeProject.title}
+                  label={activeProject.desc}
+                  source={activeProject.source}
+                  frameWidth={activeProject.frameWidth}
+                  frameHeight={activeProject.frameHeight}
+                  columns={activeProject.columns}
+                  fps={activeProject.fps}
+                  frameCount={activeProject.frameCount}
+                  hyperlinkLabel={activeProject.hyperlinkLabel}
                 />
-                )}
-
+              )}
             </Pressable>
           </Pressable>
         </Modal>
 
-        <ScrollView style={[styles.scrollArea, {backgroundColor: colors.backgroundA}]} contentContainerStyle={styles.scrollContent}>
+        {/* Scrollable Project List */}
+        <ScrollView
+          style={[
+            styles.scrollArea,
+            {
+              backgroundColor: colors.backgroundA,
+              width: isMobile ? "95%" : "40%",
+              maxHeight: isMobile ? "60%" : "70%",
+            },
+          ]}
+          contentContainerStyle={[
+            styles.scrollContent,
+            {
+              paddingBottom: isMobile ? 30 : 20,
+            },
+          ]}
+        >
           {projects.map((p) => (
             <LevelButton
               key={p.id}
@@ -241,7 +288,16 @@ export default function LevelScreen({ navigation }: levelScreenProp) {
         </ScrollView>
 
         {/* Bottom navigation */}
-        <View style={styles.bottomContainer}>
+        <View
+          style={[
+            styles.bottomContainer,
+            {
+              flexDirection: isMobile ? "column" : "row",
+              gap: isMobile ? 10 : 0,
+              marginTop: isMobile ? 20 : 0,
+            },
+          ]}
+        >
           <GameButton
             label="Back"
             labelHovered="To Menu"
@@ -268,11 +324,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
-    margin: 25,
   },
   bottomContainer: {
     width: "100%",
-    flexDirection: "row",
     justifyContent: "space-between",
   },
   modalContainer: {
@@ -280,35 +334,29 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0,0,0,0.5)",
+    paddingHorizontal: 10,
   },
-    modalBox: {
-    width: "50%",
-    height: "70%",
+  modalBox: {
     borderColor: "black",
     borderWidth: 2,
     justifyContent: "flex-start",
     alignItems: "center",
-    padding: 20,
+    borderRadius: 8,
   },
   scrollArea: {
-    flex: 1,
-    width: "40%",
     borderColor: "black",
     borderWidth: 2,
-    margin: 10,
-    flexShrink: 1,
+    marginVertical: 10,
+    borderRadius: 8,
   },
   scrollContent: {
     alignItems: "center",
-    paddingBottom: 20,
     margin: 5,
   },
   textTitle: {
-    fontSize: 20,
     fontFamily: Fonts.menu,
     borderBottomWidth: 4,
     borderBottomColor: "white",
     paddingBottom: 4,
-    margin: 5,
   },
 });

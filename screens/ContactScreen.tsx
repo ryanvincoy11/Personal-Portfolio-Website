@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import { GameButton } from "../components/UI/GameButton";
 import { Hyperlink } from "../components/UI/Hyperlink";
 import { Colors, Fonts } from "../constants/theme";
@@ -7,58 +7,113 @@ import { Linking } from "react-native";
 import { useTheme } from "../components/ThemeProvider";
 
 type ContactScreenProps = {
-    navigation: any
-}
+  navigation: any;
+};
 
 export default function ContactScreen({ navigation }: ContactScreenProps) {
-    const { theme, toggleTheme } = useTheme();
-    const colors = Colors[theme];
+  const { theme } = useTheme();
+  const colors = Colors[theme];
+  const { width: screenWidth } = useWindowDimensions();
 
-    function handleBack() {
-        navigation.navigate("Home");
-    }
+  const isMobile = screenWidth < 600;
 
-    return (
-        <View style={[styles.container, { backgroundColor: colors.backgroundB}]}>
-            <View style={styles.nonBackButton}>
-                <Text style={[styles.textTitle, { color: colors.ccText}]}>Contact Info:</Text>
+  const titleFont = isMobile ? 20 : 25;
+  const textFont = isMobile ? 16 : 20;
 
-                <View style={styles.linkContainer}>
-                    <Text style={[styles.text, { color: colors.ccText}]}>Email: vincoyrj@outlook.com</Text>
-                </View>
+  function handleBack() {
+    navigation.navigate("Home");
+  }
 
-                <View style={styles.linkContainer}>
-                    <Text style={[styles.text, { color: colors.ccText}]}>LinkedIn: </Text>
-                    <Hyperlink
-                    label="https://www.linkedin.com/in/ryan-vincoy-886596362/"
-                    size={20}
-                    onPress={() => Linking.openURL("https://www.linkedin.com/in/ryan-vincoy-886596362/")}
-                    />
-                </View>
+  return (
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: colors.backgroundB,
+          paddingVertical: isMobile ? 20 : 10,
+          paddingHorizontal: isMobile ? 10 : 0,
+        },
+      ]}
+    >
+      {/* Contact Info */}
+      <View style={styles.nonBackButton}>
+        <Text style={[styles.textTitle, { color: colors.ccText, fontSize: titleFont }]}>
+          Contact Info:
+        </Text>
 
-                <View style={styles.linkContainer}>
-                    <Text style={[styles.text, { color: colors.ccText}]}>GitHub: </Text>
-                    <Hyperlink
-                    label="https://github.com/ryanvincoy11"
-                    size={20}
-                    onPress={() => Linking.openURL("https://github.com/ryanvincoy11")}
-                    />
-                </View>
-            </View>
-
-            <SpriteAnimator
-                source={require("../assets/Soccer.png")}
-                frameWidth={256}
-                frameHeight={256}
-                columns={3}
-                frameCount={10}
-                fps={10}
-                animateHorizontal={false}
-            />
-
-            <GameButton label="Back" labelHovered="To Menu" onPress={handleBack}/>
+        {/* Email */}
+        <View
+          style={[
+            styles.linkContainer,
+            { flexDirection: isMobile ? "column" : "row", alignItems: "center" },
+          ]}
+        >
+          <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>
+            Email: vincoyrj@outlook.com
+          </Text>
         </View>
-    );
+
+        {/* LinkedIn */}
+        <View
+          style={[
+            styles.linkContainer,
+            { flexDirection: isMobile ? "column" : "row", alignItems: "center" },
+          ]}
+        >
+          <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>
+            LinkedIn:
+          </Text>
+          <Hyperlink
+            label="https://www.linkedin.com/in/ryan-vincoy-886596362/"
+            size={isMobile ? 16 : 20}
+            onPress={() =>
+              Linking.openURL("https://www.linkedin.com/in/ryan-vincoy-886596362/")
+            }
+          />
+        </View>
+
+        {/* GitHub */}
+        <View
+          style={[
+            styles.linkContainer,
+            { flexDirection: isMobile ? "column" : "row", alignItems: "center" },
+          ]}
+        >
+          <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>
+            GitHub:
+          </Text>
+          <Hyperlink
+            label="https://github.com/ryanvincoy11"
+            size={isMobile ? 16 : 20}
+            onPress={() => Linking.openURL("https://github.com/ryanvincoy11")}
+          />
+        </View>
+      </View>
+
+      {/* Sprite */}
+      <View
+        style={{
+          transform: [{ scale: isMobile ? 1 : 1.4 }],
+          marginVertical: isMobile ? 20 : 0,
+        }}
+      >
+        <SpriteAnimator
+          source={require("../assets/Soccer.png")}
+          frameWidth={256}
+          frameHeight={256}
+          columns={3}
+          frameCount={10}
+          fps={10}
+          animateHorizontal={false}
+        />
+      </View>
+
+      {/* Back Button */}
+      <View style={{ marginBottom: isMobile ? 20 : 10 }}>
+        <GameButton label="Back" labelHovered="To Menu" onPress={handleBack} />
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -66,17 +121,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 10
-    },
+  },
   linkContainer: {
-    flexDirection: 'row',
-    margin: 10,
+    marginVertical: 10,
   },
   nonBackButton: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   textTitle: {
-    fontSize: 25,
     fontFamily: Fonts.menu,
     borderBottomWidth: 4,
     borderBottomColor: "white",
@@ -85,6 +137,5 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: Fonts.menu,
-    fontSize: 20,
   },
 });

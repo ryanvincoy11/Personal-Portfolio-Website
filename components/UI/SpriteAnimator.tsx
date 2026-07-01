@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { View, Image, Animated } from "react-native";
 
+
 type SpriteAnimatorProps = {
     source: any,
     frameWidth: number,
@@ -10,6 +11,7 @@ type SpriteAnimatorProps = {
     fps: number,
     animateHorizontal?: boolean,
 };
+
 
 export function SpriteAnimator({
   source,
@@ -22,17 +24,21 @@ export function SpriteAnimator({
 }: SpriteAnimatorProps) {
   const [frame, setFrame] = useState(0);
 
+
   // Frame stepping
   useEffect(() => {
     const interval = setInterval(() => {
       setFrame((prev) => (prev + 1) % frameCount);
     }, 1000 / fps);
 
+
     return () => clearInterval(interval);
   }, [fps, frameCount]);
 
+
   // Horizontal movement
   const x = useRef(new Animated.Value(0)).current;
+
 
   useEffect(() => {
     if (!animateHorizontal) return;
@@ -57,8 +63,10 @@ export function SpriteAnimator({
     ).start();
   }, [x]);
 
+
   const col = frame % columns;
   const row = Math.floor(frame / columns);
+
 
   return (
     <Animated.View style={{ transform: [{ translateX: x }] }}>

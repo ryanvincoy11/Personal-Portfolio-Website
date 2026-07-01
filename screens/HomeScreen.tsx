@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import { Fonts, Colors } from '../constants/theme';
 import { PressStart2P_400Regular } from "@expo-google-fonts/press-start-2p";
 import { VT323_400Regular } from '@expo-google-fonts/vt323';
@@ -11,13 +11,21 @@ import { SpriteAnimator } from '../components/UI/SpriteAnimator';
 import { useTheme } from "../components/ThemeProvider";
 
 type HomeScreenProps = {
-    navigation: any
-}
+  navigation: any;
+};
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
-
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const colors = Colors[theme];
+  const { width: screenWidth } = useWindowDimensions();
+
+  const isMobile = screenWidth < 600;
+
+  const nameStyle = {
+    ...styles.name,
+    fontSize: isMobile ? 40 : 60,
+    marginBottom: isMobile ? 20 : 40,
+  };
 
   const [fontsLoaded] = useFonts({
     PressStart2P_400Regular,
@@ -26,33 +34,20 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 
   if (!fontsLoaded) return null;
 
-  function handleCharacterCreation() {
-    navigation.navigate("CharacterCreation");
-  }
-
-  function handleResume() {
-    navigation.navigate("Resume");
-  }
-
-  function handleLevels() {
-    navigation.navigate("Level");
-  }
-
-  function handleContact() {
-    navigation.navigate("Contact");
-  }
-
-  function handleOptions() {
-    navigation.navigate("Settings");
-  }
-
   return (
     <LinearGradient
       colors={[colors.backgroundA, colors.backgroundB]}
       style={styles.background}
     >
-      
-      <View style={styles.spriteBackground}>
+      {/* Animated Background Sprite */}
+      <View
+        style={[
+          styles.spriteBackground,
+          {
+            transform: [{ scale: isMobile ? 1.5 : 3 }],
+          },
+        ]}
+      >
         <SpriteAnimator
           source={require("../assets/Jump.png")}
           frameWidth={256}
@@ -64,18 +59,46 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         />
       </View>
 
-      <View style={styles.container}>
+      {/* Main Content */}
+      <View
+        style={[
+          styles.container,
+          {
+            paddingHorizontal: isMobile ? 10 : 0,
+            paddingTop: isMobile ? 40 : 0,
+          },
+        ]}
+      >
+        <OutlinedText style={nameStyle}>Ryan Vincoy</OutlinedText>
 
-        <OutlinedText style={styles.name}>Ryan Vincoy</OutlinedText>
-        <GameButton label = "Character Creation" labelHovered = "About Me" onPress = {handleCharacterCreation} />
-        <GameButton label = "Levels" labelHovered = "Project History" onPress = {handleLevels} />
-        <GameButton label = "Resume" labelHovered = "Resumé" onPress = {handleResume} />
-        <GameButton label = "Info" labelHovered = "Contact Info" onPress = {handleContact} />
-        <GameButton label = "Options" labelHovered = "Settings" onPress = {handleOptions} />
+        <GameButton
+          label="Character Creation"
+          labelHovered="About Me"
+          onPress={() => navigation.navigate("CharacterCreation")}
+        />
+        <GameButton
+          label="Levels"
+          labelHovered="Project History"
+          onPress={() => navigation.navigate("Level")}
+        />
+        <GameButton
+          label="Resume"
+          labelHovered="Resumé"
+          onPress={() => navigation.navigate("Resume")}
+        />
+        <GameButton
+          label="Info"
+          labelHovered="Contact Info"
+          onPress={() => navigation.navigate("Contact")}
+        />
+        <GameButton
+          label="Options"
+          labelHovered="Settings"
+          onPress={() => navigation.navigate("Settings")}
+        />
+
         <StatusBar style="auto" />
-
       </View>
-
     </LinearGradient>
   );
 }
@@ -86,12 +109,11 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   spriteBackground: {
-    transform: [{ scale: 3}],
     position: "absolute",
     top: 0,
     left: 0,
@@ -101,9 +123,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   name: {
-    fontSize: 60,
     fontFamily: Fonts.menu,
     color: Colors.dark.title,
-    marginBottom: 40,
   },
 });

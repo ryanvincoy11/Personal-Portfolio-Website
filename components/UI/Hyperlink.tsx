@@ -1,62 +1,87 @@
-import { View, Pressable, Text, StyleSheet } from 'react-native';
+import { View, Pressable, Text, StyleSheet, useWindowDimensions } from 'react-native';
 import { useState } from 'react';
 import { Colors, Fonts } from '../../constants/theme';
 import { Audio } from "expo-av";
 
-type GameButtonProps = {
+type HyperlinkProps = {
   label: string;
   onPress: () => void;
-  size: number;
+  size?: number; // font size
 };
 
-export function Hyperlink({ label, onPress, size}: GameButtonProps) {
+export function Hyperlink({ label, onPress, size = 18 }: HyperlinkProps) {
   const [hovered, setHovered] = useState(false);
+  const { width: screenWidth } = useWindowDimensions();
 
-  function handleHoverIn() {
-    setHovered(true);
-  }
-
-  function handleHoverOut() {
-    setHovered(false);
-  }
+  // Responsive font size
+  const responsiveFontSize =
+    screenWidth < 480
+      ? size * 0.85 // slightly smaller on phones
+      : size;
 
   async function handlePress() {
-        const { sound } = await Audio.Sound.createAsync(
-          require("../../sounds/retroClick.mp3")
-        );
-        await sound.setVolumeAsync(0.15);
-        await sound.playAsync();
-        onPress();
+    try {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../sounds/retroClick.mp3")
+      );
+      await sound.setVolumeAsync(0.15);
+      await sound.playAsync();
+    } catch {
+      console.log("Click sound blocked until user interacts");
+    }
+
+    onPress();
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <Pressable
         onPress={handlePress}
-        onHoverIn={handleHoverIn}
-        onHoverOut={handleHoverOut}
+        onHoverIn={() => setHovered(true)}
+        onHoverOut={() => setHovered(false)}
+        style={({ pressed }) => [
+          styles.pressable,
+          pressed && styles.pressed,
+        ]}
       >
-        <Text style={[
+        <Text
+          style={[
             styles.text,
             hovered && styles.textHovered,
-            {fontSize:size}]}
-            >{label}</Text>
+            { fontSize: responsiveFontSize },
+          ]}
+        >
+          {label}
+        </Text>
       </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  textHovered: {
-    paddingHorizontal: 11,
-    borderRadius: 8,
-    fontFamily: Fonts.menu,
-    color: '#06befb'
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 6,
   },
+
+  pressable: {
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+  },
+
+  pressed: {
+    opacity: 0.7, // mobile press feedback
+  },
+
   text: {
-    paddingHorizontal: 11,
-    borderRadius: 8,
     fontFamily: Fonts.menu,
-    color: '#060afb'
+    color: '#060afb',
+    textAlign: "center",
+  },
+
+  textHovered: {
+    color: '#06befb',
+    textDecorationLine: "underline",
   },
 });
