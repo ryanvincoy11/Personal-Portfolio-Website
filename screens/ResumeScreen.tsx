@@ -51,7 +51,7 @@ export default function ResumeScreen({ navigation }: ResumeScreenProps) {
 
       {/* RESUME IMAGE */}
       <Image
-        source={require("../assets/RyanVincoyResume.png")}
+        source={require("../assets/RyanVincoyResume-1.png")}
         resizeMode="contain"
         style={[
           styles.resumeImage,
