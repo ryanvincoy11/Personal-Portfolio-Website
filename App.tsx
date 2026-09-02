@@ -8,6 +8,7 @@ import ContactScreen from "./screens/ContactScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import {AudioProvider} from "./components/AudioProvider";
 import {ThemeProvider} from "./components/ThemeProvider";
+import { MiniGameProvider } from "./components/MiniGameProvider";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,16 +16,18 @@ export default function App() {
   return (
     <ThemeProvider>
       <AudioProvider>
-        <NavigationContainer>
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="CharacterCreation" component={CharacterCreationScreen} />
-            <Stack.Screen name="Resume" component={ResumeScreen} />
-            <Stack.Screen name="Level" component={LevelScreen} />
-            <Stack.Screen name="Contact" component={ContactScreen} />
-            <Stack.Screen name="Settings" component={SettingsScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <MiniGameProvider>
+          <NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="CharacterCreation" component={CharacterCreationScreen} />
+              <Stack.Screen name="Resume" component={ResumeScreen} />
+              <Stack.Screen name="Level" component={LevelScreen} />
+              <Stack.Screen name="Contact" component={ContactScreen} />
+              <Stack.Screen name="Settings" component={SettingsScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </MiniGameProvider>
       </AudioProvider>
     </ThemeProvider>
   );
