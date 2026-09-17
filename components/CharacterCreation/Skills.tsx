@@ -36,7 +36,7 @@ export default function Skills() {
                 <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>Languages: Java, C++, Python, C#,</Text>
                 <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>TypeScript, SQL, F#, GO, C </Text>
                 <View style={styles.divider} />
-                <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>Front-End: React Native, Unity UI, JavaFX</Text>
+                <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>Front-End: React, React Native, Unity UI, JavaFX</Text>
                 <View style={styles.divider} />
                 <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>Testing: JUnit5, Google Tests, NUnit</Text>
                 <View style={styles.divider} />
@@ -47,8 +47,11 @@ export default function Skills() {
                 <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>Version Control (Git), Design Patterns,</Text>
                 <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>UML Class Diagrams, Wireframing</Text>
                 <View style={styles.divider} />
+                <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>Development: Maven, Vercel, Jira</Text>
+                <View style={styles.divider} />
                 <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>Data Analysis: SQLite3, Matplotlib,</Text>
-                <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>CSV Processing, Data Visualization</Text>
+                <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>CSV Processing, Data Visualization,</Text>
+                <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>Scikit-learn, NumPy, Pandas</Text>
                 <View style={styles.divider} />
                 <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>Networking: Concurrent Programming,</Text>
                 <Text style={[styles.text, { color: colors.ccText, fontSize: textFont }]}>Socket Programming, REST APIs</Text>
